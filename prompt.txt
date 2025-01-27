@@ -1,0 +1,365 @@
+write a code for react expo app, for the project Safe Her, which is an app for Women Safety, where our theme of the app is in the given image I want to create a app for WOMEN safety where i have attached PDF from which extract the features and i want to create frontend like below i hve attafcehd in form of screenshots help me make, here is the sample of How UI must be
+
+app.js
+
+import { NavigationContainer } from '@react-navigation/native';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { StatusBar } from 'expo-status-bar';
+
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import LoginScreen from './screens/LoginScreen';
+
+import RegisterScreen from './screens/RegisterScreen';
+
+import HomeScreen from './screens/HomeScreen';
+
+import ContactsScreen from './screens/ContactsScreen';
+
+import MessageScreen from './screens/MessageScreen';
+
+const Stack = createNativeStackNavigator();
+
+const Tab = createBottomTabNavigator();
+
+function TabNavigator() {
+
+return (
+
+<Tab.Navigator
+
+screenOptions={{
+
+tabBarStyle: {
+
+backgroundColor: '#FF4D79',
+
+borderTopWidth: 0,
+
+height: 60,
+
+},
+
+tabBarActiveTintColor: '#FFF',
+
+tabBarInactiveTintColor: '#FFE4E4',
+
+}}
+
+>
+
+<Tab.Screen name="Home" component={HomeScreen} />
+
+<Tab.Screen name="Contacts" component={ContactsScreen} />
+
+<Tab.Screen name="Message" component={MessageScreen} />
+
+</Tab.Navigator>
+
+);
+
+}
+
+export default function App() {
+
+return (
+
+<SafeAreaProvider>
+
+<NavigationContainer>
+
+<StatusBar style="dark" />
+
+<Stack.Navigator initialRouteName="Login">
+
+<Stack.Screen
+
+name="Login"
+
+component={LoginScreen}
+
+options={{ headerShown: false }}
+
+/>
+
+<Stack.Screen
+
+name="Register"
+
+component={RegisterScreen}
+
+options={{ headerShown: false }}
+
+/>
+
+<Stack.Screen
+
+name="MainApp"
+
+component={TabNavigator}
+
+options={{ headerShown: false }}
+
+/>
+
+</Stack.Navigator>
+
+</NavigationContainer>
+
+</SafeAreaProvider>
+
+);
+
+}
+
+lockscreen.js :
+
+import React, { useState } from 'react';
+
+import {
+
+View,
+
+Text,
+
+TextInput,
+
+TouchableOpacity,
+
+StyleSheet,
+
+Dimensions,
+
+} from 'react-native';
+
+import Svg, { Path } from 'react-native-svg';
+
+const { width } = Dimensions.get('window');
+
+export default function LoginScreen({ navigation }) {
+
+const [email, setEmail] = useState('');
+
+const [password, setPassword] = useState('');
+
+return (
+
+<View style={styles.container}>
+
+<View style={styles.waveContainer}>
+
+<Svg height="60%" width={width} viewBox="0 0 1440 320">
+
+<Path
+
+fill="#A6365A"
+
+d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+
+/>
+
+</Svg>
+
+</View>
+
+<View style={styles.formContainer}>
+
+<Text style={styles.title}>Login</Text>
+
+<TextInput
+
+style={styles.input}
+
+placeholder="Email"
+
+value={email}
+
+onChangeText={setEmail}
+
+keyboardType="email-address"
+
+autoCapitalize="none"
+
+/>
+
+<TextInput
+
+style={styles.input}
+
+placeholder="Password"
+
+value={password}
+
+onChangeText={setPassword}
+
+secureTextEntry
+
+/>
+
+<TouchableOpacity onPress={() => {}}>
+
+<Text style={styles.forgotPassword}>Forgot Password?</Text>
+
+</TouchableOpacity>
+
+<TouchableOpacity
+
+style={styles.loginButton}
+
+onPress={() => navigation.navigate('MainApp')}
+
+>
+
+<Text style={styles.loginButtonText}>Login</Text>
+
+</TouchableOpacity>
+
+<View style={styles.socialLogin}>
+
+<TouchableOpacity style={styles.socialButton}>
+
+<Text>G</Text>
+
+</TouchableOpacity>
+
+<TouchableOpacity style={styles.socialButton}>
+
+<Text>f</Text>
+
+</TouchableOpacity>
+
+<TouchableOpacity style={styles.socialButton}>
+
+<Text>a</Text>
+
+</TouchableOpacity>
+
+</View>
+
+<View style={styles.registerContainer}>
+
+<Text style={styles.registerText}>New Here? </Text>
+
+<TouchableOpacity onPress={() => navigation.navigate('Register')}>
+
+<Text style={styles.registerLink}>Register</Text>
+
+</TouchableOpacity>
+
+</View>
+
+</View>
+
+</View>
+
+);
+
+}
+
+const styles = StyleSheet.create({
+
+container: {
+
+flex: 1,
+
+backgroundColor: '#FF4D79',
+
+},
+
+waveContainer: {
+
+height: '30%',
+
+backgroundColor: '#FF4D79',
+
+},
+
+formContainer: {
+
+flex: 1,
+
+backgroundColor: '#FFF',
+
+borderTopLeftRadius: 30,
+
+borderTopRightRadius: 30,
+
+padding: 20,
+
+marginTop: -30,
+
+},
+
+title: {
+
+fontSize: 32,
+
+fontWeight: 'bold',
+
+color: '#FF4D79',
+
+marginBottom: 30,
+
+},
+
+input: {
+
+backgroundColor: '#FFF',
+
+borderWidth: 1,
+
+borderColor: '#FF4D79',
+
+borderRadius: 25,
+
+padding: 15,
+
+marginBottom: 15,
+
+},
+
+forgotPassword: {
+
+color: '#FF4D79',
+
+textAlign: 'right',
+
+marginBottom: 20,
+
+},
+
+loginButton: {
+
+backgroundColor: '#FF4D79',
+
+borderRadius: 25,
+
+padding: 15,
+
+alignItems: 'center',
+
+marginBottom: 20,
+
+},
+
+loginButtonText: {
+
+color: '#FFF',
+
+fontSize: 16,
+
+fontWeight: 'bold',
+
+},
+
+socialLogin: {
+
+flexDirection: 'row',
+
+justifyContent: 'center',
+
+gap: 20,
